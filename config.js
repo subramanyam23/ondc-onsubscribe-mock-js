@@ -1,6 +1,5 @@
 let config = {
     cryptoURL: "https://pilot-gateway-1.beckn.nsdl.co.in/crypto",
-    registryUrl: "https://pilot-gateway-1.beckn.nsdl.co.in/ondc-3",
     
     signingKeyPair: {
         publicKey: "",
@@ -12,7 +11,8 @@ let config = {
         privateKey: ""
     },
 
-    requestId: "b0b9aa77-8531-47b7-91ce-f43db298347a",
+    proteanPublicKey: "MCowBQYDK2VuAyEA7ZznkNiktV/duFJXFfra9uReSPwsf/swfBbltKm4KRs=",
+    requestId: "27baa06d-f90a-486c-85e5-cc621b787f04",
     callbackURL: "/test"
 }
 

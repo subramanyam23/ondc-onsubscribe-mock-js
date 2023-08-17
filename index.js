@@ -5,11 +5,11 @@ const { generateKeys } = require("./utils");
 
 let {
   cryptoURL,
-  registryUrl,
   requestId,
   signingKeyPair,
   encryptionKeyPair,
-  callbackURL
+  callbackURL,
+  proteanPublicKey
 } = require("./config");
 
 const app = express();
@@ -35,11 +35,11 @@ let onSubscribeUrl = callbackURL + "/on_subscribe";
 app.post(onSubscribeUrl, async (req, res) => {
   let { challenge } = req.body;
 
-  let decryptUrl = registryUrl + "/challenge/decrypt/text";
-  let payload = { challenge, client_private_key: encryptionKeyPair.privateKey };
+  let decryptUrl = cryptoURL + "/decrypt/text";
+  let payload = { value: challenge, proteanPrivateKey: encryptionKeyPair.privateKey, clientPublicKey: proteanPublicKey };
   let decryptedResponse = await axios.post(decryptUrl, payload);
 
-  res.send(decryptedResponse.data);
+  res.send({ answer: decryptedResponse.data });
 });
 
 app.get("/config", (_, res) => {
@@ -49,7 +49,7 @@ app.get("/config", (_, res) => {
     requestId,
     callbackURL,
     cryptoURL,
-    registryUrl
+    proteanPublicKey
   });
 });
 
